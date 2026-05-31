@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>昆象云科技阳光行为准则</title>
+    <link rel="icon" href="https://hive.forms.usercontent.microsoft/Images/9188040d-6c67-4c5b-b112-36a304b66dad/00000000-0000-0000-0003-bffd409131bf/T0RRH45M4BJGVXSCOEE2GS5JAZ/fe1565ec-02bf-4b26-800f-b6b659adee28" type="image/png"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            padding: 15px;
+            max-width: 100%;
+            word-wrap: break-word;
+            padding-bottom: 120px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        h2 {
+            margin: 30px 0 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        h3 {
+            margin: 24px 0 12px;
+            font-size: 17px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        strong {
+            color: #ffffff;
+        }
+        .notice-box {
+            background-color: #2e7d32;
+            color: #ffffff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .history-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background: #1e1e1e;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .history-btn:hover {
+            transform: translateY(-2px);
+            background: #2a2a2a;
+        }
+        .history-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        #historyModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        #historyModal.active {
+            display: flex;
+        }
+        .history-content-box {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+        .history-content-box h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #fff;
+        }
+        .history-item {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+        .history-item:first-child {
+            border-left: 4px solid #ffd54f;
+            background: #2a2a1a;
+        }
+        .history-date {
+            font-weight: bold;
+            color: #ffd54f;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .history-content {
+            font-size: 14px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1565c0;
+            color: #ffffff;
+            text-align: center;
+            padding: 16px 12px;
+            font-size: 13px;
+            line-height: 1.8;
+            z-index: 900;
+        }
+        .footer-links a {
+            color: #bbdefb;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; }
+            h3 { font-size: 16px; }
+            .history-btn { padding: 6px 10px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="history-btn" onclick="openHistory()">
+        <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+        历史记录
+    </button>
+
+    <div id="historyModal" onclick="closeHistoryOnOutside(event)">
+        <div class="history-content-box">
+            <button class="close-btn" onclick="closeHistory()">&times;</button>
+            <h2>📋 历次更新记录</h2>
+
+            <div class="history-item">
+                <div class="history-date">📅 2026年5月31日（当前版本）</div>
+                <div class="history-content">
+                    <strong>本次更新：</strong><br>
+                    •①修改了服务主体信息，由"永慕科技"变更为"昆明昆象云科技有限责任公司"（简称"昆象云科技"）
+                </div>
+            </div>
+
+            <div class="history-item">
+                <div class="history-date">📅 2024年8月4日（第一版）</div>
+                <div class="history-content">
+                    <strong>准则首次发布。</strong><br>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>昆象云科技阳光行为准则</h1>
+        <p class="meta">第一版发布日期：2024年8月4日 ｜ 更新日期：2026年5月31日，目前为第二版</p>
+
+        <div class="notice-box">
+             为方便统一管理，西山区永慕智创软件工作室（个体工商户）&lt;原永慕科技&gt;的员工同样适用本准则。
+        </div>
+
+        <p>昆象云科技致力推动基于我们的价值观、愿景和宗旨而建立的企业文化。我们的价值观是<strong>正直、进取、协作和创造</strong>。</p>
+
+        <h2>正直的意思是坚守底线，以德为先，坦诚公正唯上。为弘扬正直，我们制定了相关制度，采取了一系列措施，以预防、发现及阻止贪腐或任何违反公司正直价值观的行为。昆象云科技的全体员工均须严格遵守《昆象云科技阳光行为准则》（"昆象云科技阳光准则"），阳光准则明确禁止各类型的贪腐、舞弊以及任何不符合法律法规的行为。</h2>
+
+        <h3>📌 提升反舞弊意识</h3>
+        <p>昆象云科技将反舞弊教育和宣传贯穿了员工进入公司后的每个职业节点。昆象云科技每一位员工在入职的第一天，都会清楚获知阳光准则的内容，以及公司对于触犯相关准则的<strong>"零容忍"</strong>态度。同时，昆象云科技每年会持续对董事会成员以及全体员工进行反舞弊教育，严格杜绝受贿等有违诚信和道德的行为。</p>
+
+        <h3>📌 管理准则升级</h3>
+        <p>昆象云科技会每年审阅反舞弊相关的制度内容，并在需要的时候作出修订，以确保相关制度能够符合现行法律法规要求。</p>
+
+        <h2>🔥 昆象云科技高压线</h2>
+        <p>阳光准则中的<strong>"昆象云科技高压线"</strong>是昆象云科技员工所不能触犯的行为界线，员工一旦触及此界线，<strong>一律解聘，并永不录用</strong>。如触犯相关法律、法规，达到法定立案标准，昆象云科技会依法将涉案人员移送司法机关依法处理。</p>
+
+        <p>"昆象云科技高压线"包含以下六个部分的内容。如果您希望提供有关涉及昆象云科技员工舞弊行为的信息，请通过 <strong><a href="mailto:YongmuTechnology@outlook.com" style="color:#4a9eff">YongmuTechnology@outlook.com</a></</strong> 联系昆象云科技反舞弊调查部。</p>
+
+        <h3>1. 弄虚作假</h3>
+        <p>无论个人是否获利，任何形式的弄虚作假行为都将按照触犯"昆象云科技高压线"处理。弄虚作假行为包括但不限于：对经营信息、管理信息、费用报销、招投标信息等故意弄虚作假、虚假验收、编造虚假信息或发布不实消息造成不良影响等。</p>
+
+        <h3>2. 商业贿赂</h3>
+        <p>昆象云科技严厉禁止任何形式的商业贿赂行为。昆象云科技员工及其利益相关人不得索要、收受来自现有或潜在供应商、合作伙伴的贿赂或其他利益，或向他人行贿。贿赂或其他利益包括但不限于：现金、礼品、回扣、借款、就业机会、旅游、宴请、个人服务等。</p>
+
+        <h3>3. 泄露机密</h3>
+        <p>昆象云科技员工不得泄露公司和与我们客户、员工或业务伙伴有关的机密或敏感信息。公司机密或敏感信息包括但不限于：商业秘密、公司或业务内部沟通信息、未公开内部源代码、招投标信息等。</p>
+
+        <h3>4. 不当竞争</h3>
+        <p>昆象云科技禁止员工从事与公司存在商业竞争的行为，无论个人是否从中获取经济利益。不当竞争行为包括但不限于：开发、生产、销售、经营与公司有竞争关系的同类或类似的产品、业务及服务等。</p>
+
+        <h3>5. 利益冲突</h3>
+        <p>阳光准则规定，影响员工客观合理作出商业判断的情形，可能构成利益冲突，昆象云科技员工应根据相关规定进行利益关联申报，未申报或未及时申报是触犯"昆象云科技高压线"的行为。</p>
+
+        <h3>6. 其他违法违规行为</h3>
+        <p>昆象云科技员工不得违反法律规定，或违反其他规章制度，包括但不限于：利用职务便利为个人谋取利益、渎职造成严重损失、利用工作时间或昆象云科技资源处理兼职事务、侵犯知识产权等行为。</p>
+
+        <h2>📩 举报以及调查</h2>
+        <p>为了有效收集举报线索，昆象云科技制定了《反舞弊举报制度》，设置下列多种举报途径，鼓励所有员工、业务伙伴及其他相关方举报涉及昆象云科技员工的任何已经发生或可能发生的贪腐、舞弊及违规行为。昆象云科技接受匿名举报，也鼓励举报者留下姓名和联系方式，以便跟进调查和反馈调查进度。昆象云科技会在法律法规许可范围内确保举报信息的保密性。</p>
+
+        <p>昆象云科技委派反舞弊调查部开展独立的调查工作，如员工行为触犯"昆象云科技高压线"，一律按制度规定解聘处理，永不录用。如发现涉案外部公司存在严重违规行为，会立刻将其列入黑名单，永不合作。如调查发现涉嫌违法犯罪的行为，昆象云科技将依法将有关案件移送司法机关进行处理。</p>
+
+        <h3>举报渠道：</h3>
+        <ul>
+            <li>📧 举报邮箱：<strong><a href="mailto:YongmuTechnology@outlook.com" style="color:#4a9eff">YongmuTechnology@outlook.com</a></</strong></li>
+            <li>🛡️ 昆象云科技安全中心：<strong><a href="https://wearcadpolice.mysxl.cn" target="_blank">https://wearcadpolice.mysxl.cn</a></strong></li>
+        </ul>
+            <p style="text-align:center; margin-top:40px; color:#888;">【正文完】</p>
+    </div>
+
+    <div class="footer">
+        <div>© 2022-<span id="currentYear"></span> 昆明昆象云科技有限责任公司 版权所有</div>
+        <div class="footer-links">
+            <a href="https://kunxy.top" target="_blank">昆象云科技官网</a> ｜ 
+            <a href="https://rule-portal.yongmukeji.top" target="_blank">昆象云科技规章制度访问指引</a> ｜ 
+            <a href="https://yongmukeji.top" target="_blank">永慕智创软件工作室官网</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function openHistory() {
+            document.getElementById('historyModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeHistory() {
+            document.getElementById('historyModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeHistoryOnOutside(event) {
+            if (event.target.id === 'historyModal') {
+                closeHistory();
+            }
+        }
+
+        document.getElementById('historyModal').addEventListener('click', closeHistoryOnOutside);
+    </script>
+</body>
+</html>
